@@ -34,14 +34,17 @@ const markerRadius = 3;
 const hqMarkerScale = 4; // Scaling factor for markers of headquarters in relation to markers for branches
 
 // Initialize the map
-var map = L.map('map', {
-    center: [40, 15], 
-    zoom: 4
-});
+var map = L.map('map').setView([40, 15], 4);
+
 
 // Add Esri tiles to the map
-// Question: Do I need to register for an API key to be able to use Esri? Current zoom level is limited to 9, which is fine, but if there are other limitations, then just using Esri is not a good idea
-L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+// This map is NOT open source. It can only be used 1 mio times per month max!
+// Esri API key plainly visible, needs to be saved elsewhere before being uploaded
+// API valid until 13 November 2025
+const apiKey = 
+'...'
+;
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}?apikey='+apiKey, {
 	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
 	maxZoom: 9
 }).addTo(map);
