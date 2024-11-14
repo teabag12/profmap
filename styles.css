@@ -1,0 +1,10 @@
+/* styles.css */
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+/* Add any additional styling here */
+body {
+    font-family: Arial, sans-serif;
+}
