@@ -27,11 +27,9 @@ const profiteers_br = [
     { name: "Profiteer 17", coords: [43.6108, 3.8772] },  // Montpellier (close to an existing marker)
 ];
 
-// Define color and opacity for markers
+// Define color and opacity for circular markers. Styling of cluster and square markers is set in the CSS-file
 const markerColor = '#8B0000'; // Dark red 
-const clusterColor = '#8B0000';
 const markerOpacity = 0.8;
-const clusterOpacity = 0.8;
 const markerRadius = 3;
 const hqMarkerScale = 4; // Scaling factor for markers of headquarters in relation to markers for branches
 
@@ -53,12 +51,10 @@ L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_
 var markers = L.markerClusterGroup({
     iconCreateFunction: function(cluster) {
         var count = cluster.getChildCount();
-        var size = '30px';
-
         return L.divIcon({
-            html: '<div style="background-color: ' + clusterColor + '; color: white; border: none; border-radius: 50%; width: ' + size + '; height: ' + size + '; display: flex; align-items: center; justify-content: center; font-size: 16px; box-shadow: none; opacity: ' + clusterOpacity + ';">' + count + '</div>',
+            html: '<div class="custom-cluster-icon">' + count + '</div>',
             className: 'custom-cluster-icon',
-            iconSize: L.point(size, size)
+            iconSize: L.point(30, 30)
         });
     },
     showCoverageOnHover: false,
@@ -76,7 +72,7 @@ function createMarkers(profiteers, type) {
             marker = L.marker(profiteer.coords, {
                 icon: L.divIcon({
                     className: 'square-marker',
-                    html: '<div style="background-color:' + markerColor + '; width: ' + (markerRadius * hqMarkerScale) + 'px; height: ' + (markerRadius * hqMarkerScale) + 'px; border-radius: 0;"></div>',
+                    html: '<div style="width: ' + (markerRadius * hqMarkerScale) + 'px; height: ' + (markerRadius * hqMarkerScale) + 'px;"></div>',
                     iconSize: [markerRadius * hqMarkerScale, markerRadius * hqMarkerScale]
                 })
             });     
@@ -89,7 +85,6 @@ function createMarkers(profiteers, type) {
                 radius: markerRadius
             });
         }
-
 
         // Bind a popup with the name and coordinates
         marker.bindPopup('<b>' + profiteer.name + '</b><br><em>' + type + '</em><br>Location: ' + profiteer.coords[0] + ', ' + profiteer.coords[1]);
