@@ -1,6 +1,8 @@
 // profmap.js
 
-// Initialize profiteers list -> Question: change that later to the actual list
+// Initialize profiteers list
+// TODO: this is just sample data -> change that later to the actual list by reading the data either from a file or by a database query
+// TODO: discuss with Fine what kind of data should be displayed within in the map, e.g. short desciption? Then implement this
 const profiteers_hq = [
     { name: "Profiteer 1-1", coords: [48.8566, 2.3522] },   // Paris, France
     { name: "Profiteer 1-2", coords: [48.8566, 2.3522] },   // Another marker in Paris, France
@@ -38,12 +40,10 @@ var map = L.map('map').setView([40, 15], 4);
 
 
 // Add Esri tiles to the map
-// This map is NOT open source. It can only be used 1 mio times per month max!
-// Esri API key plainly visible, needs to be saved elsewhere before being uploaded
-// API valid until 13 November 2025
-const apiKey = 
-'...'
-;
+// TODO: first of all, this map is NOT open source. It can only be used 1 mio times per month max! -> fine for now I think
+// TODO: add personal API key to backend (?) (current API valid until 13 November 2025)
+const apiKey = '...';
+
 L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}?apikey='+apiKey, {
 	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
 	maxZoom: 9
